@@ -72,6 +72,7 @@ contract ExecutionManager is ContractResolver {
      */
 
     DataTypes.ExecutionContext executionContext;
+    StateManager stateManager;
 
 
     /*
@@ -92,7 +93,7 @@ contract ExecutionManager is ContractResolver {
         ContractResolver(_addressResolver)
     {
         // Deploy a default state manager
-        StateManager stateManager = resolveStateManager();
+        stateManager = StateManager(resolveContract("StateManager"));
 
         // Associate all Ethereum precompiles
         for (uint160 i = 1; i < 20; i++) {
@@ -129,6 +130,7 @@ contract ExecutionManager is ContractResolver {
         public
     {
         addressResolver.setAddress("StateManager", _stateManagerAddress);
+        stateManager = StateManager(_stateManagerAddress);
     }
 
 
@@ -1267,6 +1269,6 @@ contract ExecutionManager is ContractResolver {
         view
         returns (StateManager)
     {
-        return StateManager(resolveContract("StateManager"));
+        return stateManager;
     }
 }
