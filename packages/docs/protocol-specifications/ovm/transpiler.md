@@ -32,7 +32,7 @@ The following opcodes need to be dealt with at transpilation time to work with t
 | `ADDRESS` | Returns the address of the currently execution contract. Needs to be modified since on L1 this would be the code contract's address, but on L2 it will be an OVM address. | 0 | 1 |
 | `CALLER`\* | This is `msg.sender` in solidity. Needs to be modified since on L1 this would be the Execution Manager's address, but on L2 it is meant to be an OVM address. | 0 | 1 |
 | `EXTCODESIZE` | This gets the size of an external contract's code. Needs to be modified on L2 since it is meant to accept an OVM address which doesn't exist on L1. | 1 \(`addr`\) | 1 |
-| `EXTCODEHASH` | This gets the size of an external contract's code. Needs to be modified on L2 since it is meant to accept an OVM address which doesn't exist on L1. | 1 \(`addr`\) | 1 |
+| `EXTCODEHASH` | This gets the hash of an external contract's code. Needs to be modified on L2 since it is meant to accept an OVM address which doesn't exist on L1. | 1 \(`addr`\) | 1 |
 | `TIMESTAMP`\*\* | This gets the timestamp of the current block \(in Solidity: `block.timestamp`\). Needs to be transpiled to the `ovmTIMESTAMP`. | 0 | 1 |
 | `SLOAD` | This gets the value of a storage slot at the first stack input \(`key`\). Needs to be transpiled to `ovmSLOAD` instead. | 1 \(`key`\) | 1 |
 | `SSTORE` | This gets the value of a storage slot at the first stack input \(`key`\). Needs to be transpiled to `ovmSSTORE` instead. | 2 \(`key, value`\) | 0 |
